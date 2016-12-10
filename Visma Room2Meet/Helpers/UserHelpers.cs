@@ -8,10 +8,10 @@ namespace Visma_Room2Meet.Helpers
 {
     public static class User
     {
-        private static room2meet_dbEntities db = new room2meet_dbEntities();
 
         public static AspNetUser GetUser(string UserName)
         {
+            room2meet_dbEntities db = new room2meet_dbEntities();
             var user = db.AspNetUsers.Where(u => u.UserName == UserName).FirstOrDefault();
             if (user != null)
             {
@@ -22,6 +22,7 @@ namespace Visma_Room2Meet.Helpers
 
         public static string GetUserRole(string UserName)
         {
+            room2meet_dbEntities db = new room2meet_dbEntities();
             var user = db.AspNetUsers.Where(u => u.UserName == UserName).FirstOrDefault();
             if (user != null && user.AspNetRoles.Count > 0)
             {
@@ -32,6 +33,7 @@ namespace Visma_Room2Meet.Helpers
 
         public static string GetUserRoleId(string UserName)
         {
+            room2meet_dbEntities db = new room2meet_dbEntities();
             var user = db.AspNetUsers.Where(u => u.UserName == UserName).FirstOrDefault();
             if (user != null && user.AspNetRoles.Count > 0)
             {
@@ -42,6 +44,7 @@ namespace Visma_Room2Meet.Helpers
 
         public static int? GetUserRoleOrder(string UserName)
         {
+            room2meet_dbEntities db = new room2meet_dbEntities();
             var user = db.AspNetUsers.Where(u => u.UserName == UserName).FirstOrDefault();
             if (user != null && user.AspNetRoles.Count > 0)
             {

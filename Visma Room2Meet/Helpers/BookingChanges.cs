@@ -7,10 +7,9 @@ namespace Visma_Room2Meet.Helpers
 {
     public static class BookingChanges
     {
-        private static room2meet_dbEntities db = new room2meet_dbEntities();
-
         public static bool HandleChange(int bookingID, string userID, string changeText)
         {
+            room2meet_dbEntities db = new room2meet_dbEntities();
             Booking booking = db.Bookings.Find(bookingID);
             if (booking == null)
             {

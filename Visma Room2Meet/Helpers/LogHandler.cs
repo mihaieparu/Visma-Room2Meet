@@ -8,10 +8,9 @@ namespace Visma_Room2Meet.Helpers
 {
     public static class LogHandler
     {
-        private static room2meet_dbEntities db = new room2meet_dbEntities();
-
         public static Log HandleLog(LogType LogType, string Location, string Message, string InnerException = "", System.Collections.Specialized.NameValueCollection Params = null)
         {
+            room2meet_dbEntities db = new room2meet_dbEntities();
             Dictionary<string, string> param = new Dictionary<string, string>();
             if (Params != null)
             {
