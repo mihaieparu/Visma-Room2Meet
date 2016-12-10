@@ -1,0 +1,41 @@
+﻿@model Visma_Room2Meet.Building
+
+@{
+    ViewBag.Title = "View building details";
+    var userRoleOrder = Visma_Room2Meet.Helpers.User.GetUserRoleOrder(User.Identity.Name);
+}
+
+<h2>@ViewBag.Title</h2>
+@if (userRoleOrder == -1)
+{
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+        <li><a href="@Url.Action("Index", "Buildings")">Buildings</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+}
+<br />
+
+<div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        @if (Model.ImageUrl != null)
+        {
+            <img class="img-responsive" src="@Model.ImageUrl" />
+        }
+        <h3>@Model.Name</h3>
+        <h4>Building code: <kbd>@Model.BuildingCode</kbd></h4>
+        @if (Model.OpenHour != null && Model.CloseHour != null)
+        {
+            <span>Opens at: <b>@Model.OpenHour</b></span><br />
+            <span>Closes at: <b>@Model.CloseHour</b></span>
+        }
+    </div>
+    <div class="col-lg-8 col-md-6 col-sm-12">
+        @if (Model.Description != null)
+        {
+            <p>@Html.Raw(Model.Description)</p>
+        }
+        Address: <b>@Html.Raw(Model.Address)</b>
+        <br />Country: <b>@Model.Country</b>
+    </div>
+</div>

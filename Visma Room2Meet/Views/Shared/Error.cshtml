@@ -1,0 +1,22 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+    Log log = (Log)ViewBag.Log;
+}
+
+<hgroup>
+    <h1 class="text-danger">Error.</h1>
+    <h2 class="text-danger">An error occurred while processing your request.</h2>
+    <h3>Error details: @log.Message</h3>
+    <br />
+    <a href="javascript:goBack()" class="btn btn-primary"><span class="fa fa-fw fa-chevron-left"></span> Go back</a>
+</hgroup>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+
+    console.error("Inner exception message: @log.InnerException");
+</script>

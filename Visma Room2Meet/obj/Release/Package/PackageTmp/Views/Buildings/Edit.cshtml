@@ -1,0 +1,93 @@
+﻿@model Visma_Room2Meet.Building
+
+@{
+    ViewBag.Title = "Edit an existing building";
+}
+
+<h2>@ViewBag.Title</h2>
+<ol class="breadcrumb">
+    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+    <li><a href="@Url.Action("Index", "Buildings")">Buildings</a></li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.BuildingID)
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <br />
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="BuildingCode">Code</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BuildingCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "Building code (eg. ROTM)" } })
+                @Html.ValidationMessageFor(model => model.BuildingCode, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="Name">Name</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Building name" } })
+                @Html.ValidationMessageFor(model => model.Name, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="Country">Country</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control", @placeholder = "Country" } })
+                @Html.ValidationMessageFor(model => model.Country, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="Address">Address</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", @placeholder = "Address (HTML-ready)" } })
+                @Html.ValidationMessageFor(model => model.Address, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="Country">Description</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @placeholder = "Description (optional)" } })
+                @Html.ValidationMessageFor(model => model.Description, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="ImageUrl">Image URL</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ImageUrl, new { htmlAttributes = new { @class = "form-control", @placeholder = "Image URL (optional)" } })
+                @Html.ValidationMessageFor(model => model.ImageUrl, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="OpenHour">Opens at</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.OpenHour, new { htmlAttributes = new { @class = "form-control", @placeholder = "Opening hour (optional)", @type = "time" } })
+                        @Html.ValidationMessageFor(model => model.OpenHour, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="CloseHour">Closes at</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CloseHour, new { htmlAttributes = new { @class = "form-control", @placeholder = "Closing hour (optional)", @type = "time" } })
+                        @Html.ValidationMessageFor(model => model.CloseHour, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <center>
+            <button type="submit" class="btn btn-primary"><span class="fa fa-fw fa-save"></span> Save building!</button>
+        </center>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

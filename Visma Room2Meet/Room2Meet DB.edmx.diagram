@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e6ef93f0873d4eaa9078ce869d6ee3d5" Name="Diagram1" >
+        <EntityTypeShape EntityType="room2meet_dbModel.AspNetRole" Width="1.5" PointX="0.75" PointY="2.375" />
+        <EntityTypeShape EntityType="room2meet_dbModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="1" />
+        <EntityTypeShape EntityType="room2meet_dbModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="3.75" />
+        <EntityTypeShape EntityType="room2meet_dbModel.AspNetUser" Width="1.5" PointX="3" PointY="1.375" />
+        <AssociationConnector Association="room2meet_dbModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="room2meet_dbModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="room2meet_dbModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="room2meet_dbModel.Asset" Width="1.5" PointX="7.625" PointY="14.75" />
+        <EntityTypeShape EntityType="room2meet_dbModel.Booking" Width="1.5" PointX="7.625" PointY="5.375" />
+        <EntityTypeShape EntityType="room2meet_dbModel.BookingHistory" Width="1.5" PointX="9.875" PointY="3.875" />
+        <EntityTypeShape EntityType="room2meet_dbModel.BookingStatus" Width="1.5" PointX="5.375" PointY="10.75" />
+        <EntityTypeShape EntityType="room2meet_dbModel.Building" Width="1.5" PointX="0.75" PointY="5.125" />
+        <EntityTypeShape EntityType="room2meet_dbModel.Room" Width="1.5" PointX="7.625" PointY="10.125" />
+        <EntityTypeShape EntityType="room2meet_dbModel.RoomAsset" Width="1.5" PointX="9.875" PointY="10.625" />
+        <EntityTypeShape EntityType="room2meet_dbModel.RoomRole" Width="1.5" PointX="9.875" PointY="7.875" />
+        <AssociationConnector Association="room2meet_dbModel.FK_RoomRole_AspNetRoles" />
+        <AssociationConnector Association="room2meet_dbModel.FK_AspNetUsers_Building" />
+        <AssociationConnector Association="room2meet_dbModel.FK_Booking_User" />
+        <AssociationConnector Association="room2meet_dbModel.FK_BookingHistory_User" />
+        <AssociationConnector Association="room2meet_dbModel.FK_RoomAsset_Asset" />
+        <AssociationConnector Association="room2meet_dbModel.FK_Booking_BookingStatus" />
+        <AssociationConnector Association="room2meet_dbModel.FK_Booking_Room" />
+        <AssociationConnector Association="room2meet_dbModel.FK_BookingHistory_Booking" />
+        <AssociationConnector Association="room2meet_dbModel.FK_Room_BookingStatus" />
+        <AssociationConnector Association="room2meet_dbModel.FK_Room_Building" />
+        <AssociationConnector Association="room2meet_dbModel.FK_RoomAsset_Room" />
+        <AssociationConnector Association="room2meet_dbModel.FK_RoomRole_Room" />
+        <EntityTypeShape EntityType="room2meet_dbModel.Log" Width="1.5" PointX="14.625" PointY="1" />
+        <EntityTypeShape EntityType="room2meet_dbModel.LogType" Width="1.5" PointX="12.375" PointY="1.25" />
+        <AssociationConnector Association="room2meet_dbModel.FK_Log_LogType" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

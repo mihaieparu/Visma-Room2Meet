@@ -1,0 +1,12 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Not activated";
+}
+
+<hgroup>
+    <h1 class="text-danger">Not activated</h1>
+    <h2 class="text-danger">This account has not been activated yet, please try again later.</h2>
+    <br />
+    <a href="@Url.Action("Login", "Account")" class="btn btn-primary"><span class="fa fa-fw fa-chevron-left"></span> Try again</a>
+</hgroup>

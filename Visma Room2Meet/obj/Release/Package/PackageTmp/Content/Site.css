@@ -1,0 +1,131 @@
+﻿@font-face {
+    font-family: PFBeauSansPro;
+    src: url("pfbeausanspro-regular.ttf");
+}
+
+*:not(.fa) {
+    font-family: PFBeauSansPro !important;
+}
+
+.fa {
+    font-family:FontAwesome !important;
+}
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+.navbar-black {
+    background-color:black;
+}
+
+.navbar-black .navbar-nav > li > a {
+    color:lightgray;
+}
+
+.navbar-black .navbar-nav > li > a:hover {
+    color:white;
+}
+
+.navbar-black .navbar-nav > .open > a, .navbar-black .navbar-nav > .open > a:hover, .navbar-black .navbar-nav > .open > a:focus, .navbar-black * .nav > li > a:hover, .navbar-black * .nav > li > a:focus {
+    background-color:black;
+}
+
+.custom-cbox {
+    border: 1px solid rgba(0,0,0,0);
+    padding: 4px 8px;
+    font-size: 14px;
+    background-color: #fff;
+    display:inline-block;
+    margin:0;
+    width:auto;
+    height:auto;
+    cursor:hand;
+    cursor:pointer;
+    border-radius:3px;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+}
+.custom-cbox.margins {
+    margin:15px;
+    margin-left:0;
+    margin-top:0;
+}
+.custom-cbox[data-checked="true"] {
+    border:1px solid #0d87e9;
+}
+.custom-cbox .fa {
+    color:lightgray;
+}
+.custom-cbox[data-checked="true"] .fa {
+    color:#0d87e9;
+}
+.custom-cbox input {
+    display:none;
+}
+.custom-radio {
+    border: 1px solid #e5e6e7;
+    padding: 5px 10px;
+    font-size: 14px;
+    background-color: #fff;
+    display:inline-block;
+    margin:0;
+    width:auto;
+    height:auto;
+    cursor:hand;
+    cursor:pointer;
+    border-radius:3px;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+}
+.custom-radio.margins {
+    margin:15px;
+    margin-left:0;
+    margin-top:0;
+}
+.custom-radio[data-checked="true"] {
+    border:1px solid #0d87e9;
+}
+.custom-radio .fa {
+    color:lightgray;
+}
+.custom-radio[data-checked="true"] .fa {
+    color:#0d87e9;
+}
+.custom-radio input {
+    display:none;
+}
+
+.label {
+    line-height:2em;
+}
+
+.search-result {
+    cursor:hand;
+    cursor:pointer;
+}
+
+.search-result.panel-body {
+    padding:15px;
+}
+
+.valign {
+    display: flex;
+    align-items: center;
+}
+
+td .btn, td * .btn {
+    margin-bottom:5px;
+}

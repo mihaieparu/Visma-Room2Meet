@@ -1,0 +1,74 @@
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\roslyn\csc.exe
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\roslyn\vbc.exe
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\roslyn\VBCSCompiler.exe
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Visma Room2Meet.dll.config
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Visma Room2Meet.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Visma Room2Meet.pdb
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Antlr3.Runtime.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\EntityFramework.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\EntityFramework.SqlServer.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Microsoft.Owin.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Microsoft.Owin.Security.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Newtonsoft.Json.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Owin.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\System.Web.Helpers.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\System.Web.Mvc.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\System.Web.Optimization.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\System.Web.Razor.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\System.Web.WebPages.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\System.Web.WebPages.Razor.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\WebGrease.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\System.Web.Helpers.xml
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\System.Web.Mvc.xml
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\System.Web.Optimization.xml
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\System.Web.Razor.xml
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\System.Web.WebPages.xml
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\System.Web.WebPages.Razor.xml
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Antlr3.Runtime.pdb
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Newtonsoft.Json.xml
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\EntityFramework.xml
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\EntityFramework.SqlServer.xml
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Microsoft.Owin.xml
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Microsoft.Owin.Security.xml
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\obj\Debug\Visma Room2Meet.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\obj\Debug\Visma Room2Meet.pdb
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\obj\Debug\Visma Room2Meet.csprojResolveAssemblyReference.cache
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\RestSharp.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Twilio.Api.dll
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\RestSharp.xml
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Twilio.Api.pdb
+C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\bin\Twilio.Api.xml

@@ -1,0 +1,54 @@
+﻿@using Visma_Room2Meet.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+}
+
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-lg-offset-3 col-md-offset-3 col-sm-offset-0">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <center><img src="~/Content/logo.png" alt="Visma Room2Meet" style="max-height:25px" /></center>
+            </div>
+            <div class="panel-body">
+                <h3 style="text-align:center">@ViewBag.Title</h3>
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <br />
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <center>
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            @Html.LabelFor(m => m.RememberMe)
+                        </div>
+                    </center>
+                    <br />
+                    <center>
+                        <button type="submit" class="btn btn-default"><span class="fa fa-fw fa-sign-in"></span> Log in</button>
+                    </center>
+                    <br />
+                    <p>
+                        <center>Don't have an account? @Html.ActionLink("Register now!", "Register")</center>
+                    </p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

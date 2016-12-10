@@ -1,0 +1,455 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="room2meet_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="room2meet_dbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AspNetRoles" EntityType="room2meet_dbModel.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="room2meet_dbModel.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserLogins" EntityType="room2meet_dbModel.AspNetUserLogin" />
+    <EntitySet Name="AspNetUsers" EntityType="room2meet_dbModel.AspNetUser" />
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="room2meet_dbModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="room2meet_dbModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="room2meet_dbModel.AspNetUserRoles">
+      <End Role="AspNetRole" EntitySet="AspNetRoles" />
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <EntitySet Name="Assets" EntityType="room2meet_dbModel.Asset" />
+    <EntitySet Name="Bookings" EntityType="room2meet_dbModel.Booking" />
+    <EntitySet Name="BookingHistories" EntityType="room2meet_dbModel.BookingHistory" />
+    <EntitySet Name="BookingStatuses" EntityType="room2meet_dbModel.BookingStatus" />
+    <EntitySet Name="Buildings" EntityType="room2meet_dbModel.Building" />
+    <EntitySet Name="Rooms" EntityType="room2meet_dbModel.Room" />
+    <EntitySet Name="RoomAssets" EntityType="room2meet_dbModel.RoomAsset" />
+    <EntitySet Name="RoomRoles" EntityType="room2meet_dbModel.RoomRole" />
+    <AssociationSet Name="FK_RoomRole_AspNetRoles" Association="room2meet_dbModel.FK_RoomRole_AspNetRoles">
+      <End Role="AspNetRole" EntitySet="AspNetRoles" />
+      <End Role="RoomRole" EntitySet="RoomRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUsers_Building" Association="room2meet_dbModel.FK_AspNetUsers_Building">
+      <End Role="Building" EntitySet="Buildings" />
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Booking_User" Association="room2meet_dbModel.FK_Booking_User">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="Booking" EntitySet="Bookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookingHistory_User" Association="room2meet_dbModel.FK_BookingHistory_User">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="BookingHistory" EntitySet="BookingHistories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoomAsset_Asset" Association="room2meet_dbModel.FK_RoomAsset_Asset">
+      <End Role="Asset" EntitySet="Assets" />
+      <End Role="RoomAsset" EntitySet="RoomAssets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Booking_BookingStatus" Association="room2meet_dbModel.FK_Booking_BookingStatus">
+      <End Role="BookingStatu" EntitySet="BookingStatuses" />
+      <End Role="Booking" EntitySet="Bookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Booking_Room" Association="room2meet_dbModel.FK_Booking_Room">
+      <End Role="Room" EntitySet="Rooms" />
+      <End Role="Booking" EntitySet="Bookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookingHistory_Booking" Association="room2meet_dbModel.FK_BookingHistory_Booking">
+      <End Role="Booking" EntitySet="Bookings" />
+      <End Role="BookingHistory" EntitySet="BookingHistories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Room_BookingStatus" Association="room2meet_dbModel.FK_Room_BookingStatus">
+      <End Role="BookingStatu" EntitySet="BookingStatuses" />
+      <End Role="Room" EntitySet="Rooms" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Room_Building" Association="room2meet_dbModel.FK_Room_Building">
+      <End Role="Building" EntitySet="Buildings" />
+      <End Role="Room" EntitySet="Rooms" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoomAsset_Room" Association="room2meet_dbModel.FK_RoomAsset_Room">
+      <End Role="Room" EntitySet="Rooms" />
+      <End Role="RoomAsset" EntitySet="RoomAssets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoomRole_Room" Association="room2meet_dbModel.FK_RoomRole_Room">
+      <End Role="Room" EntitySet="Rooms" />
+      <End Role="RoomRole" EntitySet="RoomRoles" />
+    </AssociationSet>
+    <EntitySet Name="Logs" EntityType="room2meet_dbModel.Log" />
+    <EntitySet Name="LogTypes" EntityType="room2meet_dbModel.LogType" />
+    <AssociationSet Name="FK_Log_LogType" Association="room2meet_dbModel.FK_Log_LogType">
+      <End Role="LogType" EntitySet="LogTypes" />
+      <End Role="Log" EntitySet="Logs" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Order" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="room2meet_dbModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+    <NavigationProperty Name="RoomRoles" Relationship="room2meet_dbModel.FK_RoomRole_AspNetRoles" FromRole="AspNetRole" ToRole="RoomRole" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="room2meet_dbModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="room2meet_dbModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="room2meet_dbModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="room2meet_dbModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+    <NavigationProperty Name="AspNetRoles" Relationship="room2meet_dbModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+    <Property Name="BuildingID" Type="Int32" />
+    <NavigationProperty Name="Building" Relationship="room2meet_dbModel.FK_AspNetUsers_Building" FromRole="AspNetUser" ToRole="Building" />
+    <NavigationProperty Name="Bookings" Relationship="room2meet_dbModel.FK_Booking_User" FromRole="AspNetUser" ToRole="Booking" />
+    <NavigationProperty Name="BookingHistories" Relationship="room2meet_dbModel.FK_BookingHistory_User" FromRole="AspNetUser" ToRole="BookingHistory" />
+    <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Type="room2meet_dbModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="room2meet_dbModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaim">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Type="room2meet_dbModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="room2meet_dbModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogin">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Type="room2meet_dbModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+    <End Type="room2meet_dbModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+  </Association>
+  <EntityType Name="Asset">
+    <Key>
+      <PropertyRef Name="AssetID" />
+    </Key>
+    <Property Name="AssetID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="ShowAs" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="RoomAssets" Relationship="room2meet_dbModel.FK_RoomAsset_Asset" FromRole="Asset" ToRole="RoomAsset" />
+  </EntityType>
+  <EntityType Name="Booking">
+    <Key>
+      <PropertyRef Name="BookingID" />
+    </Key>
+    <Property Name="BookingID" Type="Int32" Nullable="false" />
+    <Property Name="BookingReference" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="RoomID" Type="Int32" Nullable="false" />
+    <Property Name="AspNetUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="BookingStatusID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="room2meet_dbModel.FK_Booking_User" FromRole="Booking" ToRole="AspNetUser" />
+    <NavigationProperty Name="BookingStatus" Relationship="room2meet_dbModel.FK_Booking_BookingStatus" FromRole="Booking" ToRole="BookingStatu" />
+    <NavigationProperty Name="Room" Relationship="room2meet_dbModel.FK_Booking_Room" FromRole="Booking" ToRole="Room" />
+    <NavigationProperty Name="BookingHistories" Relationship="room2meet_dbModel.FK_BookingHistory_Booking" FromRole="Booking" ToRole="BookingHistory" />
+  </EntityType>
+  <EntityType Name="BookingHistory">
+    <Key>
+      <PropertyRef Name="BookingHistoryID" />
+    </Key>
+    <Property Name="BookingHistoryID" Type="Int32" Nullable="false" />
+    <Property Name="AspNetUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="BookingID" Type="Int32" Nullable="false" />
+    <Property Name="ChangeDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ChangeText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="room2meet_dbModel.FK_BookingHistory_User" FromRole="BookingHistory" ToRole="AspNetUser" />
+    <NavigationProperty Name="Booking" Relationship="room2meet_dbModel.FK_BookingHistory_Booking" FromRole="BookingHistory" ToRole="Booking" />
+  </EntityType>
+  <EntityType Name="BookingStatus">
+    <Key>
+      <PropertyRef Name="BookingStatusID" />
+    </Key>
+    <Property Name="BookingStatusID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Bookings" Relationship="room2meet_dbModel.FK_Booking_BookingStatus" FromRole="BookingStatu" ToRole="Booking" />
+    <NavigationProperty Name="Rooms" Relationship="room2meet_dbModel.FK_Room_BookingStatus" FromRole="BookingStatu" ToRole="Room" />
+  </EntityType>
+  <EntityType Name="Building">
+    <Key>
+      <PropertyRef Name="BuildingID" />
+    </Key>
+    <Property Name="BuildingID" Type="Int32" Nullable="false" />
+    <Property Name="BuildingCode" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+    <Property Name="ImageUrl" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="OpenHour" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="CloseHour" Type="Time" Nullable="false" Precision="7" />
+    <NavigationProperty Name="AspNetUsers" Relationship="room2meet_dbModel.FK_AspNetUsers_Building" FromRole="Building" ToRole="AspNetUser" />
+    <NavigationProperty Name="Rooms" Relationship="room2meet_dbModel.FK_Room_Building" FromRole="Building" ToRole="Room" />
+  </EntityType>
+  <EntityType Name="Room">
+    <Key>
+      <PropertyRef Name="RoomID" />
+    </Key>
+    <Property Name="RoomID" Type="Int32" Nullable="false" />
+    <Property Name="BuildingID" Type="Int32" Nullable="false" />
+    <Property Name="Floor" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="Capacity" Type="Int32" Nullable="false" />
+    <Property Name="RoomCode" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="DefaultBookingStatusID" Type="Int32" Nullable="false" />
+    <Property Name="MaximumBookingHours" Type="Time" Precision="7" />
+    <NavigationProperty Name="Bookings" Relationship="room2meet_dbModel.FK_Booking_Room" FromRole="Room" ToRole="Booking" />
+    <NavigationProperty Name="BookingStatus" Relationship="room2meet_dbModel.FK_Room_BookingStatus" FromRole="Room" ToRole="BookingStatu" />
+    <NavigationProperty Name="Building" Relationship="room2meet_dbModel.FK_Room_Building" FromRole="Room" ToRole="Building" />
+    <NavigationProperty Name="RoomAssets" Relationship="room2meet_dbModel.FK_RoomAsset_Room" FromRole="Room" ToRole="RoomAsset" />
+    <NavigationProperty Name="RoomRoles" Relationship="room2meet_dbModel.FK_RoomRole_Room" FromRole="Room" ToRole="RoomRole" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+    <Property Name="ImgUrl" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="RoomAsset">
+    <Key>
+      <PropertyRef Name="RoomAssetID" />
+    </Key>
+    <Property Name="RoomAssetID" Type="Int32" Nullable="false" />
+    <Property Name="RoomID" Type="Int32" Nullable="false" />
+    <Property Name="AssetID" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Asset" Relationship="room2meet_dbModel.FK_RoomAsset_Asset" FromRole="RoomAsset" ToRole="Asset" />
+    <NavigationProperty Name="Room" Relationship="room2meet_dbModel.FK_RoomAsset_Room" FromRole="RoomAsset" ToRole="Room" />
+  </EntityType>
+  <EntityType Name="RoomRole">
+    <Key>
+      <PropertyRef Name="RoomRoleID" />
+    </Key>
+    <Property Name="RoomRoleID" Type="Int32" Nullable="false" />
+    <Property Name="RoomID" Type="Int32" Nullable="false" />
+    <Property Name="AspNetRoleID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetRole" Relationship="room2meet_dbModel.FK_RoomRole_AspNetRoles" FromRole="RoomRole" ToRole="AspNetRole" />
+    <NavigationProperty Name="Room" Relationship="room2meet_dbModel.FK_RoomRole_Room" FromRole="RoomRole" ToRole="Room" />
+  </EntityType>
+  <Association Name="FK_RoomRole_AspNetRoles">
+    <End Type="room2meet_dbModel.AspNetRole" Role="AspNetRole" Multiplicity="1" />
+    <End Type="room2meet_dbModel.RoomRole" Role="RoomRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRole">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RoomRole">
+        <PropertyRef Name="AspNetRoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUsers_Building">
+    <End Type="room2meet_dbModel.Building" Role="Building" Multiplicity="0..1" />
+    <End Type="room2meet_dbModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Building">
+        <PropertyRef Name="BuildingID" />
+      </Principal>
+      <Dependent Role="AspNetUser">
+        <PropertyRef Name="BuildingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Booking_User">
+    <End Type="room2meet_dbModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="room2meet_dbModel.Booking" Role="Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="AspNetUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookingHistory_User">
+    <End Type="room2meet_dbModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="room2meet_dbModel.BookingHistory" Role="BookingHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BookingHistory">
+        <PropertyRef Name="AspNetUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoomAsset_Asset">
+    <End Type="room2meet_dbModel.Asset" Role="Asset" Multiplicity="1" />
+    <End Type="room2meet_dbModel.RoomAsset" Role="RoomAsset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Asset">
+        <PropertyRef Name="AssetID" />
+      </Principal>
+      <Dependent Role="RoomAsset">
+        <PropertyRef Name="AssetID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Booking_BookingStatus">
+    <End Type="room2meet_dbModel.BookingStatus" Role="BookingStatu" Multiplicity="1" />
+    <End Type="room2meet_dbModel.Booking" Role="Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BookingStatu">
+        <PropertyRef Name="BookingStatusID" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="BookingStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Booking_Room">
+    <End Type="room2meet_dbModel.Room" Role="Room" Multiplicity="1" />
+    <End Type="room2meet_dbModel.Booking" Role="Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Room">
+        <PropertyRef Name="RoomID" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="RoomID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookingHistory_Booking">
+    <End Type="room2meet_dbModel.Booking" Role="Booking" Multiplicity="1" />
+    <End Type="room2meet_dbModel.BookingHistory" Role="BookingHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Booking">
+        <PropertyRef Name="BookingID" />
+      </Principal>
+      <Dependent Role="BookingHistory">
+        <PropertyRef Name="BookingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Room_BookingStatus">
+    <End Type="room2meet_dbModel.BookingStatus" Role="BookingStatu" Multiplicity="1" />
+    <End Type="room2meet_dbModel.Room" Role="Room" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BookingStatu">
+        <PropertyRef Name="BookingStatusID" />
+      </Principal>
+      <Dependent Role="Room">
+        <PropertyRef Name="DefaultBookingStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Room_Building">
+    <End Type="room2meet_dbModel.Building" Role="Building" Multiplicity="1" />
+    <End Type="room2meet_dbModel.Room" Role="Room" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Building">
+        <PropertyRef Name="BuildingID" />
+      </Principal>
+      <Dependent Role="Room">
+        <PropertyRef Name="BuildingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoomAsset_Room">
+    <End Type="room2meet_dbModel.Room" Role="Room" Multiplicity="1" />
+    <End Type="room2meet_dbModel.RoomAsset" Role="RoomAsset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Room">
+        <PropertyRef Name="RoomID" />
+      </Principal>
+      <Dependent Role="RoomAsset">
+        <PropertyRef Name="RoomID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoomRole_Room">
+    <End Type="room2meet_dbModel.Room" Role="Room" Multiplicity="1" />
+    <End Type="room2meet_dbModel.RoomRole" Role="RoomRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Room">
+        <PropertyRef Name="RoomID" />
+      </Principal>
+      <Dependent Role="RoomRole">
+        <PropertyRef Name="RoomID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Log">
+    <Key>
+      <PropertyRef Name="LogID" />
+    </Key>
+    <Property Name="LogID" Type="Int32" Nullable="false" />
+    <Property Name="LogTypeID" Type="Int32" Nullable="false" />
+    <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Location" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Message" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="InnerException" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="LogType" Relationship="room2meet_dbModel.FK_Log_LogType" FromRole="Log" ToRole="LogType" />
+    <Property Name="Params" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="LogType">
+    <Key>
+      <PropertyRef Name="LogTypeID" />
+    </Key>
+    <Property Name="LogTypeID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Logs" Relationship="room2meet_dbModel.FK_Log_LogType" FromRole="LogType" ToRole="Log" />
+  </EntityType>
+  <Association Name="FK_Log_LogType">
+    <End Type="room2meet_dbModel.LogType" Role="LogType" Multiplicity="1" />
+    <End Type="room2meet_dbModel.Log" Role="Log" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LogType">
+        <PropertyRef Name="LogTypeID" />
+      </Principal>
+      <Dependent Role="Log">
+        <PropertyRef Name="LogTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

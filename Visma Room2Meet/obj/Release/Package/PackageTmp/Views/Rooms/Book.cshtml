@@ -1,0 +1,69 @@
+﻿@model Visma_Room2Meet.Room
+
+@{
+    ViewBag.Title = "Book a meeting room";
+    var userRoleOrder = Visma_Room2Meet.Helpers.User.GetUserRoleOrder(User.Identity.Name);
+}
+
+<h2>@ViewBag.Title</h2>
+@if (userRoleOrder == -1)
+{
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+        <li><a href="@Url.Action("Index", "Rooms")">Meeting rooms</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+}
+<br />
+
+<div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        @if (Model.ImgUrl != null)
+        {
+            <img class="img-responsive" src="@Model.ImgUrl" />
+        }
+        <h3>@Model.Name</h3>
+        <h4>Building code: <kbd>@Model.Building.BuildingCode</kbd></h4>
+        <h4>Floor: <kbd>@Model.Floor</kbd></h4>
+        <h4>Room code: <kbd>@Model.RoomCode</kbd></h4>
+        <h4>Capacity: <b>@Model.Capacity</b></h4>
+    </div>
+    <div class="col-lg-8 col-md-6 col-sm-12">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.RoomID)
+            <div class="row">
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="Date">Meeting date</label>
+                    <div class="col-md-10">
+                        <input id="Date" name="Date" class="form-control" type="date" placeholder="Date" />
+                    </div>
+                </div>
+                <br /><br />
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="Start">Meeting start</label>
+                    <div class="col-md-10">
+                        <input id="Start" name="Start" class="form-control" type="time" placeholder="Start time" />
+                    </div>
+                </div>
+                <br /><br />
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="End">Meeting end</label>
+                    <div class="col-md-10">
+                        <input id="End" name="End" class="form-control" type="time" placeholder="End time" />
+                    </div>
+                </div>
+            </div>
+            <br /><br />
+            <center><button type="submit" class="btn btn-primary"><span class="fa fa-fw fa-ticket"></span> Book now!</button></center>
+        }
+        
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(".tlt").tooltip();
+    </script>
+}

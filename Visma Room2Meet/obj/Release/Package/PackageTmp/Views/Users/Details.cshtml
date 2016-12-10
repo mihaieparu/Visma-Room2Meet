@@ -1,0 +1,52 @@
+﻿@model Visma_Room2Meet.AspNetUser
+
+@{
+    ViewBag.Title = "View profile";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            <h3>@Html.DisplayFor(model => model.UserName)</h3>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Building.BuildingCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Building.BuildingCode)
+        </dd>
+
+    </dl>
+</div>

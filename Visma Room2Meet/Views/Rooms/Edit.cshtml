@@ -1,0 +1,201 @@
+﻿@model Visma_Room2Meet.Room
+
+@{
+    ViewBag.Title = "Edit an existing meeting room";
+    List<AspNetRole> aspNetRoles = (List<AspNetRole>)ViewBag.AspNetRoles;
+    List<Asset> assets = (List<Asset>)ViewBag.Assets;
+}
+
+<h2>@ViewBag.Title</h2>
+<ol class="breadcrumb">
+    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+    <li><a href="@Url.Action("Index", "Rooms")">Meeting rooms</a></li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+
+<div class="modals">
+    <div class="modal fade" id="asset-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Add an asset to this room</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="assetID" class="col-md-2 control-label">Asset</label>
+                        <div class="col-md-10">
+                            <select id="assetID" class="form-control">
+                                <option value="">Select asset...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br /><br />
+                    <div class="form-group">
+                        <label for="assetDescription" class="col-md-2 control-label">Description</label>
+                        <div class="col-md-10">
+                            <input id="assetDescription" type="text" class="form-control" placeholder="Asset description (eg. model)" />
+                        </div>
+                    </div>
+                    <br />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary btn-sm" id="submit-btn" data-dismiss="modal"><span class="fa fa-fw fa-plus"></span> Add asset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("Edit", "Rooms", FormMethod.Post, new { @onsubmit = "javascript: submitForm();" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.RoomID)
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <input type="hidden" name="AllowedGroups" />
+        <input type="hidden" name="Assets" />
+        <br />
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="BuildingID">Building</label>
+            <div class="col-md-10">
+                @Html.DropDownList("BuildingID", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "Select a building...")
+                @Html.ValidationMessageFor(model => model.BuildingID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="Floor">Floor</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Floor, new { htmlAttributes = new { @class = "form-control", @placeholder = "Room's floor (eg. ET1)" } })
+                @Html.ValidationMessageFor(model => model.Floor, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="Name">Name</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Room name" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="Description">Description</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @placeholder = "Room description (optional)" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="ImgUrl">Image URL</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ImgUrl, new { htmlAttributes = new { @class = "form-control", @placeholder = "Image URL (optional)" } })
+                @Html.ValidationMessageFor(model => model.ImgUrl, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="Capacity">Capacity</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Capacity, new { htmlAttributes = new { @class = "form-control", @type = "number", @placeholder = "Room capacity" } })
+                @Html.ValidationMessageFor(model => model.Capacity, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="RoomCode">Room code</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RoomCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "Room code (eg. S12)" } })
+                @Html.ValidationMessageFor(model => model.RoomCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="DefaultBookingStatusID">Default booking status</label>
+            <div class="col-md-10">
+                @Html.DropDownList("DefaultBookingStatusID", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "Select default booking status...")
+                @Html.ValidationMessageFor(model => model.DefaultBookingStatusID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="MaximumBookingHours">Maximum time/booking</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MaximumBookingHours, new { htmlAttributes = new { @class = "form-control", @type = "time", @placeholder = "Maximum time per booking (optional)" } })
+                @Html.ValidationMessageFor(model => model.MaximumBookingHours, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Allowed user groups</label>
+            <div class="col-md-10">
+                @foreach (AspNetRole r in aspNetRoles)
+                {
+                    <div class="custom-cbox margins" data-cbox-name="role-cbox" data-cbox-value="@r.Id" data-checked="@((Model.RoomRoles.Where(rr => rr.AspNetRoleID == r.Id).ToList().Count > 0 ? "true" : "false"))"><span class="fa fa-fw fa-check"></span> <span class="cbox-value">@r.Name</span></div>
+                }
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Assets</label>
+            <div class="col-md-10">
+                <h5 class="assets-labels">
+                    @foreach (RoomAsset ra in Model.RoomAssets.ToList())
+                    {
+                        <span class="label label-primary label-asset" data-asset-id="@ra.AssetID" data-asset-description="@ra.Description">@ra.Asset.Name<span class="fa fa-fw fa-times" onclick="javascript:deleteAsset(@ra.AssetID);"></span></span>
+                    }
+                </h5>
+                <a onclick="javascript: addAsset();" class="btn btn-sm btn-primary"><span class="fa fa-fw fa-plus"></span> Add an asset</a>
+            </div>
+        </div>
+        <br />
+        <center>
+            <button type="submit" class="btn btn-primary"><span class="fa fa-fw fa-save"></span> Save room!</button>
+        </center>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        var assets = Array();
+        @foreach (Asset a in assets)
+        {
+            @:$("#asset-modal").find("#assetID").append('<option value="@a.AssetID">@a.Name</option>');
+        }
+
+        function addAsset() {
+            $("#asset-modal").find("#assetID").val("");
+            $("#asset-modal").find("#assetDescription").val("");
+            $("#asset-modal").modal("show");
+        }
+
+        $("#asset-modal").find("#submit-btn").on("click", function () {
+            var el = $("#asset-modal");
+            if (el.find("#assetID").val() != "") {
+                $(".assets-labels").append('<span class="label label-primary label-asset" data-asset-id="' + el.find("#assetID").val() + '" data-asset-description="' + encodeURIComponent(el.find("#assetDescription").val()) + '">' + $("#asset-modal").find("#assetID").find('option[value="' + el.find("#assetID").val() + '"]').text() + ' <span class="fa fa-fw fa-times" onclick="javascript:deleteAsset(' + parseInt(el.find("#assetID").val()) + ');"></span></span> ');
+                $("#asset-modal").modal("hide");
+            }
+            else {
+                alert("Select an asset!");
+            }
+        });
+
+        function deleteAsset(id) {
+            $('.label[data-asset-id="' + id + '"]').remove();
+        }
+
+        function getAssets() {
+            var value = Array();
+            $(".label-asset").each(function () {
+                value.push({ id: $(this).attr("data-asset-id"), description: decodeURIComponent($(this).attr("data-asset-description")) });
+            });
+            return JSON.stringify(value);
+        }
+
+        function submitForm() {
+            $('input[name="AllowedGroups"]').val(encodeURIComponent(getCboxValue("role-cbox")));
+            $('input[name="Assets"]').val(encodeURIComponent(getAssets()));
+        }
+    </script>
+}

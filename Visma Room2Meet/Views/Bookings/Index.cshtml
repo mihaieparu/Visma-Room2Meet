@@ -1,0 +1,210 @@
+﻿@model IEnumerable<Visma_Room2Meet.Booking>
+
+@{
+    Styles.Render("~/dataTablesStyles");
+    ViewBag.Title = "View all bookings";
+    var userRoleLevel = Visma_Room2Meet.Helpers.User.GetUserRoleOrder(User.Identity.Name); //get current user's role level
+    var my = new List<Booking>();
+    if (userRoleLevel > -1)
+    {
+        my = (List<Booking>)ViewBag.My;
+    }
+}
+
+<style>
+    label {
+        font-weight: normal;
+    }
+
+    .dataTables_wrapper {
+        padding-bottom: 0;
+        width: calc(100% - 15px);
+    }
+
+    .dataTables_filter {
+        float: right;
+        margin-bottom: 10px;
+    }
+</style>
+
+<h2>
+    @ViewBag.Title
+    <a href="@Url.Action("Search", "Rooms")" class="btn btn-sm btn-primary pull-right hidden-sm hidden-xs"><span class="fa fa-fw fa-search"></span> Search for a meeting room</a>
+</h2>
+<ol class="breadcrumb">
+    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+    <li><a href="@Url.Action("Index", "Bookings")">Bookings</a></li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+
+@if (userRoleLevel > -1)
+{
+    <h3>My bookings</h3>
+    <hr />
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Booking ref.</th>
+                    <th>Building</th>
+                    <th>Meeting room</th>
+                    <th>Created at</th>
+                    <th>Meeting start</th>
+                    <th>Meeting end</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Booking b in my.ToList())
+                {
+                    <tr>
+                        <td><kbd>#@b.BookingReference</kbd></td>
+                        <td><a href="@Url.Action("Details", "Buildings", new { @id = b.Room.BuildingID })" target="_blank"><span class="fa fa-fw fa-external-link"></span> @b.Room.Building.Name</a></td>
+                        <td><a href="@Url.Action("Details", "Rooms", new { @id = b.RoomID })" target="_blank"><span class="fa fa-fw fa-external-link"></span> @b.Room.Name</a></td>
+                        <td>@b.CreatedDate</td>
+                        <td>@b.StartDate</td>
+                        <td>@b.EndDate</td>
+                        <td>
+                            @switch (b.BookingStatus.Name)
+                            {
+                                case "Pending":
+                                    <span class="label label-default"><span class="fa fa-fw fa-clock-o"></span> Pending</span>
+                                    break;
+                                case "Booked":
+                                    <span class="label label-info"><span class="fa fa-fw fa-ticket"></span> Booked</span>
+                                    break;
+                                case "Meeting":
+                                    <span class="label label-warning"><span class="fa fa-fw fa-briefcase"></span> Meeting</span>
+                                    break;
+                                case "Completed":
+                                    <span class="label label-success"><span class="fa fa-fw fa-check"></span> Completed</span>
+                                    break;
+                                case "Canceled":
+                                    <span class="label label-danger"><span class="fa fa-fw fa-times"></span> Canceled</span>
+                                    break;
+                            }
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Details", new { @id = b.BookingID })" title="View booking details" class="btn btn-default btn-sm"><span class="fa fa-fw fa-clock-o"></span> Booking details</a> 
+                            @switch (b.BookingStatus.Name)
+                            {
+                                case "Pending":
+                                    <a href="@Url.Action("Cancel", new { @id = b.BookingID })" title="Cancel booking" class="btn btn-danger btn-sm"><span class="fa fa-fw fa-times"></span> Cancel</a>
+                                    break;
+                                case "Booked":
+                                    <a href="@Url.Action("Cancel", new { @id = b.BookingID })" title="Cancel booking" class="btn btn-danger btn-sm"><span class="fa fa-fw fa-times"></span> Cancel</a>
+                                    <a href="@Url.Action("StartMeeting", new { @id = b.BookingID })" title="Start meeting" class="btn btn-success btn-sm"><span class="fa fa-fw fa-briefcase"></span> Start meeting</a>
+                                    break;
+                                case "Meeting":
+                                    <a href="@Url.Action("FinishMeeting", new { @id = b.BookingID })" title="Finish meeting" class="btn btn-success btn-sm"><span class="fa fa-fw fa-check"></span> Finish meeting</a>
+                                    break;
+                            }
+                            @if (b.BookingStatus.Name != "Meeting" && b.BookingStatus.Name != "Completed" && b.BookingStatus.Name != "Canceled")
+                            {
+                                <a href="@Url.Action("Edit", new { @id = b.BookingID })" title="Edit booking" class="btn btn-primary btn-sm"><span class="fa fa-fw fa-pencil"></span> Edit</a>
+                            }
+                            @if (b.BookingStatus.Name == "Canceled")
+                            {
+                                <a href="@Url.Action("Delete", new { @id = b.BookingID })" title="Delete booking" class="btn btn-danger btn-sm"><span class="fa fa-fw fa-times"></span> Delete</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+@if (userRoleLevel != 0)
+{
+    <h3>Other users' bookings</h3>
+    <hr />
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Booking ref.</th>
+                    <th>Building</th>
+                    <th>Meeting room</th>
+                    <th>User</th>
+                    <th>Created at</th>
+                    <th>Meeting start</th>
+                    <th>Meeting end</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Booking b in Model.ToList())
+                {
+                    <tr>
+                        <td><kbd>#@b.BookingReference</kbd></td>
+                        <td><a href="@Url.Action("Details", "Buildings", new { @id = b.Room.BuildingID })" target="_blank"><span class="fa fa-fw fa-external-link"></span> @b.Room.Building.Name</a></td>
+                        <td><a href="@Url.Action("Details", "Rooms", new { @id = b.RoomID })" target="_blank"><span class="fa fa-fw fa-external-link"></span> @b.Room.Name</a></td>
+                        <td><a href="@Url.Action("Details", "Users", new { @id = b.AspNetUser.Id })" target="_blank"><span class="fa fa-fw fa-external-link"></span> @b.AspNetUser.UserName</a></td>
+                        <td>@b.CreatedDate</td>
+                        <td>@b.StartDate</td>
+                        <td>@b.EndDate</td>
+                        <td>
+                            @switch (b.BookingStatus.Name)
+                            {
+                                case "Pending":
+                                    <span class="label label-default"><span class="fa fa-fw fa-clock-o"></span> Pending</span>
+                                    break;
+                                case "Booked":
+                                    <span class="label label-info"><span class="fa fa-fw fa-ticket"></span> Booked</span>
+                                    break;
+                                case "Meeting":
+                                    <span class="label label-warning"><span class="fa fa-fw fa-briefcase"></span> Meeting</span>
+                                    break;
+                                case "Completed":
+                                    <span class="label label-success"><span class="fa fa-fw fa-check"></span> Completed</span>
+                                    break;
+                                case "Canceled":
+                                    <span class="label label-danger"><span class="fa fa-fw fa-times"></span> Canceled</span>
+                                    break;
+                            }
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Details", new { @id = b.BookingID })" title="View booking details" class="btn btn-default btn-sm"><span class="fa fa-fw fa-clock-o"></span> Booking details</a> 
+                            <a href="@Url.Action("History", new { @id = b.BookingID })" title="View booking history" class="btn btn-default btn-sm"><span class="fa fa-fw fa-clock-o"></span> Booking history</a> 
+                            @switch (b.BookingStatus.Name)
+                            {
+                                case "Pending":
+                                    <a href="@Url.Action("Approve", new { @id = b.BookingID })" title="Approve booking" class="btn btn-primary btn-sm"><span class="fa fa-fw fa-check"></span> Approve</a>
+                                    <a href="@Url.Action("Cancel", new { @id = b.BookingID })" title="Cancel booking" class="btn btn-danger btn-sm"><span class="fa fa-fw fa-times"></span> Cancel</a>
+                                    break;
+                                case "Booked":
+                                    <a href="@Url.Action("Cancel", new { @id = b.BookingID })" title="Cancel booking" class="btn btn-danger btn-sm"><span class="fa fa-fw fa-times"></span> Cancel</a>
+                                    break;
+                            }
+                            @if (b.BookingStatus.Name != "Meeting" && b.BookingStatus.Name != "Completed" && b.BookingStatus.Name != "Canceled")
+                            {
+                                <a href="@Url.Action("Edit", new { @id = b.BookingID })" title="Edit booking" class="btn btn-primary btn-sm"><span class="fa fa-fw fa-pencil"></span> Edit</a>
+                            }
+                            @if (b.BookingStatus.Name == "Canceled")
+                            {
+                                <a href="@Url.Action("Delete", new { @id = b.BookingID })" title="Delete booking" class="btn btn-danger btn-sm"><span class="fa fa-fw fa-times"></span> Delete</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/dataTables");
+    <script>
+        $(document).ready(function () {
+            $(".table").DataTable({
+                order: [],
+                "pageLength": 50,
+            });
+        });
+        $(".tlt").tooltip();
+    </script>
+}

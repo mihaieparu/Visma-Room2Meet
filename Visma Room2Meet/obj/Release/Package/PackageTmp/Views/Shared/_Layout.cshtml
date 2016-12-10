@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Visma Room2Meet</title>
+    <link rel="icon" type="image/png" href="~/Content/favicon.png" sizes="48x48">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="https://use.fontawesome.com/106bf6f26c.js"></script>
+</head>
+<body>
+    @if (Request.IsAuthenticated)
+    {
+        var userRoleOrder = Visma_Room2Meet.Helpers.User.GetUserRoleOrder(User.Identity.Name);
+        <div class="navbar @((User.IsInRole("Administrator") ? "navbar-black" : "navbar-inverse")) navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="@Url.Action("Index", "Home")"><img src="~/Content/logo.png" style="max-height:25px; margin-top:20px; margin-right:15px; margin-left:15px" alt="Visma Room2Meet" /></a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="@Url.Action("Index", "Bookings")" title="Manage bookings">Bookings</a>
+                        </li>
+                        @if (userRoleOrder == 0)
+                        {
+                            <li>
+                                <a href="@Url.Action("Search", "Rooms")" title="Search for a meeting room">Meeting rooms</a>
+                            </li>
+                        }
+                        @if (userRoleOrder == -1)
+                        {
+                            <li>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="Manage buildings">Buildings <span class="fa fa-fw fa-caret-down"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="@Url.Action("Index", "Buildings")">View all buildings</a></li>
+                                    <li><a href="@Url.Action("Create", "Buildings")">Add a new building</a></li>
+                                </ul>
+                            </li>
+                        }
+                        @if (userRoleOrder != 0)
+                        {
+                            <li>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="Manage meeting rooms">Meeting rooms <span class="fa fa-fw fa-caret-down"></span></a>
+                                <ul class="dropdown-menu">
+                                    @if (userRoleOrder == -1)
+                                    {
+                                        <li><a href="@Url.Action("Index", "Rooms")">View all meeting rooms</a></li>
+                                        <li><a href="@Url.Action("Create", "Rooms")">Add a new meeting room</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a href="@Url.Action("Search", "Rooms")" title="Search for a meeting room">Search for a meeting room</a></li>
+                                    }
+                                </ul>
+                            </li>
+                        }
+                        @if (userRoleOrder == -1)
+                        {
+                            <li>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="Manage assets">Assets <span class="fa fa-fw fa-caret-down"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="@Url.Action("Index", "Assets")">View all assets</a></li>
+                                    <li><a href="@Url.Action("Create", "Assets")">Add a new asset</a></li>
+                                </ul>
+                            </li>
+                        }
+                        @if (userRoleOrder != 0)
+                        {
+                            <li>
+                                <a href="@Url.Action("Index", "Users")" title="Manage users">Users</a>
+                            </li>
+                        }
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>
+        </div>
+    }
+    <div class="container body-content">
+        <br />
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Visma Room2Meet. <span class="pull-right">Developed by <a href="http://www.linkedin.com/in/mihaieparu" target="_blank">Mihai-Alin Eparu</a> during the second edition of Visma Code for Cash competition</span></p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

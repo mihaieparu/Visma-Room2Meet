@@ -1,0 +1,114 @@
+﻿@model IEnumerable<Visma_Room2Meet.AspNetUser>
+
+@{
+    Styles.Render("~/dataTablesStyles");
+    ViewBag.Title = "View all users";
+    var userRoleOrder = Visma_Room2Meet.Helpers.User.GetUserRoleOrder(User.Identity.Name);
+}
+
+<style>
+    label {
+        font-weight: normal;
+    }
+
+    .dataTables_wrapper {
+        padding-bottom: 0;
+        width: calc(100% - 15px);
+    }
+
+    .dataTables_filter {
+        float: right;
+        margin-bottom: 10px;
+    }
+</style>
+
+<h2>@ViewBag.Title</h2>
+<ol class="breadcrumb">
+    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+    <li><a href="@Url.Action("Index", "Users")">Users</a></li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+<br />
+
+<div class="table-responsive">
+    <table class="table table-hover table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>E-mail</th>
+                <th>Role</th>
+                <th>Building</th>
+                <th>Locked</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (AspNetUser u in Model.ToList())
+            {
+                <tr>
+                    <td>@u.Name</td>
+                    <td>@u.Email</td>
+                    <td>@u.AspNetRoles.FirstOrDefault().Name</td>
+                    <td>
+                        @if (u.BuildingID != null)
+                        {
+                            <a href="@Url.Action("Details", "Buildings", new { @id = @u.BuildingID })" title="See building details" target="_blank"><span class="fa fa-fw fa-external-link"></span> @((u.Building.BuildingCode != null ? u.Building.BuildingCode : u.Building.Name))</a>
+                        }
+                        else
+                        {
+                            <span>-</span>
+                        }
+                    </td>
+                    <td>
+                        @if (u.LockoutEnabled)
+                        {
+                            <a href="@Url.Action("Unlock", new { @id = u.Id })" title="Approve user" class="btn btn-primary btn-sm"><span class="fa fa-fw fa-unlock"></span> Approve</a>
+                        }
+                        else
+                        {
+                            <span class="label label-success">Approved</span>
+                        }
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Details", "Users", new { @id = u.Id })" title="View user profile" class="btn btn-default btn-sm"><span class="fa fa-fw fa-eye"></span> View profile</a>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="fa fa-fw fa-user-secret"></span> Change role <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                @if (User.IsInRole("Administrator"))
+                                {
+                                    <li><a href="@Url.Action("UpdateRole", new { @id = u.Id, @RoleID = "F865436A-E753-47A8-A020-B665A92DC248" })">Employee</a></li>
+                                    <li><a href="@Url.Action("UpdateRole", new { @id = u.Id, @RoleID = "C2D583DE-7488-4606-AF60-38CDBAC38D15" })">Team Leader</a></li>
+                                    <li><a href="@Url.Action("UpdateRole", new { @id = u.Id, @RoleID = "D787DD98-8D26-4F3A-B61A-B454171F4A0A" })">Executive</a></li>
+                                    <li><a href="@Url.Action("UpdateRole", new { @id = u.Id, @RoleID = "C1B2CB80-FAC4-4333-B19D-23E2FC44E634" })">Administrator</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="@Url.Action("UpdateRole", new { @id = u.Id, @RoleID = "F865436A-E753-47A8-A020-B665A92DC248" })">Employee</a></li>
+                                    if (userRoleOrder == 2)
+                                    {
+                                        <li><a href="@Url.Action("UpdateRole", new { @id = u.Id, @RoleID = "C2D583DE-7488-4606-AF60-38CDBAC38D15" })">Team Leader</a></li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                        <a href="@Url.Action("Delete", new { @id = u.Id })" title="Delete user" class="btn btn-danger btn-sm"><span class="fa fa-fw fa-trash-o"></span> Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/dataTables");
+    <script>
+        $(document).ready(function () {
+            $(".table").DataTable({
+                order: [],
+                "pageLength": 50,
+            });
+        });
+    </script>
+}

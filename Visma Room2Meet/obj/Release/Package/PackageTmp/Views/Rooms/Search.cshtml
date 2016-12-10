@@ -1,0 +1,139 @@
+﻿@{
+    ViewBag.Title = "Search for a meeting room";
+    var userRoleOrder = Visma_Room2Meet.Helpers.User.GetUserRoleOrder(User.Identity.Name);
+    List<Asset> assets = (List<Asset>)ViewBag.Assets;
+}
+
+<h2>@ViewBag.Title</h2>
+@if (userRoleOrder == -1)
+{
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+        <li><a href="@Url.Action("Index", "Rooms")">Meeting rooms</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+}
+<br />
+
+<div class="row">
+    <div class="col-lg-4 col-md-5 col-sm-12">
+        <h4>Refine your search</h4>
+        <hr />
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="Country">Country</label>
+            <div class="col-md-10">
+                @Html.DropDownList("Country", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "Select a country...")
+            </div>
+        </div>
+        <br /><br />
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="BuildingID">Building</label>
+            <div class="col-md-10">
+                @Html.DropDownList("BuildingID", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "Select a building...")
+            </div>
+        </div>
+        <br /><br />
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="Floor">Floor</label>
+            <div class="col-md-10">
+                @Html.DropDownList("Floor", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "Select a floor...")
+            </div>
+        </div>
+        <br /><br />
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="Capacity">Capacity</label>
+            <div class="col-md-10">
+                <input id="Capacity" name="Capacity" class="form-control" type="number" placeholder="Bigger than..." />
+            </div>
+        </div>
+        <br /><br />
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="Date">Meeting date</label>
+            <div class="col-md-10">
+                <input id="Date" name="Date" class="form-control" type="date" placeholder="Date" />
+            </div>
+        </div>
+        <br /><br />
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="Start">Meeting start</label>
+            <div class="col-md-10">
+                <input id="Start" name="Start" class="form-control" type="time" placeholder="Start time" />
+            </div>
+        </div>
+        <br /><br />
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="End">Meeting end</label>
+            <div class="col-md-10">
+                <input id="End" name="End" class="form-control" type="time" placeholder="End time" />
+            </div>
+        </div>
+        <br /><br />
+        <hr />
+        <h5>Assets</h5>
+        @foreach (Asset a in assets)
+        {
+            <input type="checkbox" id="asset-@a.AssetID" class="assets" value="@a.AssetID" />
+            <label for="asset-@a.AssetID">@Html.Raw(a.ShowAs)</label>
+            <br />
+        }
+        <hr />
+        <center><a onclick="javascript: filterQuery();" class="btn btn-sm btn-primary"><span class="fa fa-fw fa-search"></span> Search meeting rooms</a></center>
+    </div>
+    <div class="col-lg-8 col-md-7 col-sm-12" id="results">
+        <center>Here will come the results of your query.</center>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function filterQuery() {
+            params = "";
+            if ($("#Country").val()) {
+                params += (params != null ? "&" : "") + "Country=" + encodeURIComponent($("#Country").val());
+            }
+            if ($("#BuildingID").val()) {
+                params += (params != null ? "&" : "") + "BuildingID=" + encodeURIComponent($("#BuildingID").val());
+            }
+            if ($("#Floor").val()) {
+                params += (params != null ? "&" : "") + "Floor=" + encodeURIComponent($("#Floor").val());
+            }
+            if ($("#Capacity").val()) {
+                params += (params != null ? "&" : "") + "Capacity=" + encodeURIComponent($("#Capacity").val());
+            }
+            if ($("#Date").val()) {
+                params += (params != null ? "&" : "") + "Date=" + encodeURIComponent($("#Date").val());
+            }
+            if ($("#Start").val()) {
+                params += (params != null ? "&" : "") + "Start=" + encodeURIComponent($("#Start").val());
+            }
+            if ($("#End").val()) {
+                params += (params != null ? "&" : "") + "End=" + encodeURIComponent($("#End").val());
+            }
+            var assets = Array();
+            $(".assets").each(function () {
+                if ($(this).prop("checked") == true) {
+                    assets.push(parseInt($(this).attr("id").replace("asset-", "")));
+                }
+            });
+            if (assets.length) {
+                params += (params != null ? "&" : "") + "Assets=" + encodeURIComponent(JSON.stringify(assets));
+            }
+            $.ajax({
+                data: params,
+                type: "POST",
+                url: "/Rooms/SearchPartial",
+                dataType: "html",
+                success: function (result) {
+                    $("#results").html(result);
+                    $('html, body').animate({
+                        scrollTop: $("#results").offset().top - $(".nav").outerHeight() - 25
+                    }, 1000);
+                },
+                error: function (result) {
+                    alert("An error occured. Please try again later.");
+                    console.error(result);
+                }
+            });
+        }
+    </script>    
+}

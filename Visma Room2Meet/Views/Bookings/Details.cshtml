@@ -1,0 +1,54 @@
+﻿@model Visma_Room2Meet.Booking
+
+@{
+    ViewBag.Title = "View booking details";
+}
+
+<h2>@ViewBag.Title</h2>
+<ol class="breadcrumb">
+    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+    <li><a href="@Url.Action("Index", "Bookings")">Bookings</a></li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+<br />
+
+<div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        <center><img class="img-responsive" style="max-width:150px" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=@Model.BookingReference" /></center>
+        <br />
+        <center><h4><kbd>@Model.BookingReference</kbd></h4></center>
+        <br />
+        <h5>Room: <b><a href="@Url.Action("Details", "Rooms", new { @id = Model.RoomID })" target="_blank"><span class="fa fa-fw fa-external-link"></span> @Model.Room.Name</a></b></h5>
+        <h5>Created at: <b>@Model.CreatedDate</b></h5>
+    </div>
+    <div class="col-lg-8 col-md-6 col-sm-12">
+        <h4>Meeting starts at <b>@Model.StartDate</b> and ends at <b>@Model.EndDate</b>.</h4>
+        <h4>Booking status: 
+            @switch (Model.BookingStatus.Name)
+            {
+                case "Pending":
+                    <span class="label label-default"><span class="fa fa-fw fa-clock-o"></span> Pending</span>
+                    break;
+                case "Booked":
+                    <span class="label label-info"><span class="fa fa-fw fa-ticket"></span> Booked</span>
+                    break;
+                case "Meeting":
+                    <span class="label label-warning"><span class="fa fa-fw fa-briefcase"></span> Meeting</span>
+                    break;
+                case "Completed":
+                    <span class="label label-success"><span class="fa fa-fw fa-check"></span> Completed</span>
+                    break;
+                case "Canceled":
+                    <span class="label label-danger"><span class="fa fa-fw fa-times"></span> Canceled</span>
+                    break;
+            }
+        </h4>
+        <br />
+        <center>
+            @if (Model.BookingStatus.Name != "Meeting" && Model.BookingStatus.Name != "Completed" && Model.BookingStatus.Name != "Canceled")
+            {
+                <a href="@Url.Action("Edit", new { @id = Model.BookingID })" title="Edit booking" class="btn btn-primary"><span class="fa fa-fw fa-pencil"></span> Edit</a>
+            }
+        </center>
+    </div>
+</div>

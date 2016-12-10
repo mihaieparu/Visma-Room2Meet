@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Welcome";
+    var userRoleOrder = Visma_Room2Meet.Helpers.User.GetUserRoleOrder(User.Identity.Name);
+}
+
+<div class="jumbotron">
+    <h1>Welcome to Room2Meet!</h1>
+    <br />
+    @if (userRoleOrder == -1)
+    {
+        <p>You are now in the administration panel. You can't use the booking system as an administrator.</p>
+    }
+    <p class="lead">Room2Meet is a solution developed for a wide-spread use in booking meeting rooms located in multiple Visma's offices. Simply search the room you need, book and meet.</p>
+    @if (userRoleOrder != -1)
+    {
+        <br />
+        <p><a href="@Url.Action("Search", "Rooms")" class="btn btn-primary btn-lg">Search for available meeting rooms &raquo;</a></p>
+    }
+</div>

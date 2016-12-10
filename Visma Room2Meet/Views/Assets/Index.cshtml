@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Visma_Room2Meet.Asset>
+
+@{
+    Styles.Render("~/dataTablesStyles");
+    ViewBag.Title = "View all assets";
+}
+
+<style>
+    label {
+        font-weight: normal;
+    }
+
+    .dataTables_wrapper {
+        padding-bottom: 0;
+        width: calc(100% - 15px);
+    }
+
+    .dataTables_filter {
+        float: right;
+        margin-bottom: 10px;
+    }
+</style>
+
+<h2>
+    @ViewBag.Title
+    <a href="@Url.Action("Create")" class="btn btn-sm btn-primary pull-right hidden-sm hidden-xs"><span class="fa fa-fw fa-plus"></span> Add a new asset</a>
+</h2>
+<ol class="breadcrumb">
+    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+    <li><a href="@Url.Action("Index", "Assets")">Assets</a></li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+
+<div class="table-responsive">
+    <table class="table table-hover table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>ShowAs</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Asset a in Model.ToList())
+            {
+                <tr>
+                    <td>@a.Name</td>
+                    <td><center><span class="fa fa-fw fa-eye tlt" title="@a.Description.Replace("\"", "'")"></span></center></td>
+                    <td>@Html.Raw(a.ShowAs)</td>
+                    <td>
+                        <a href="@Url.Action("Edit", new { @id = a.AssetID })" title="Edit asset" class="btn btn-primary btn-sm"><span class="fa fa-fw fa-pencil"></span> Edit</a>
+                        <a href="@Url.Action("Delete", new { @id = a.AssetID })" title="Delete asset" class="btn btn-danger btn-sm"><span class="fa fa-fw fa-trash-o"></span> Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/dataTables");
+    <script>
+        $(document).ready(function () {
+            $(".table").DataTable({
+                order: [],
+                "pageLength": 50,
+            });
+        });
+        $(".tlt").tooltip();
+    </script>
+}

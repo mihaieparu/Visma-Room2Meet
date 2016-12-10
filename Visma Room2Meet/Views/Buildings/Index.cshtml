@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Visma_Room2Meet.Building>
+
+@{
+    Styles.Render("~/dataTablesStyles");
+    ViewBag.Title = "View all buildings";
+}
+
+<style>
+    label {
+        font-weight: normal;
+    }
+
+    .dataTables_wrapper {
+        padding-bottom: 0;
+        width: calc(100% - 15px);
+    }
+
+    .dataTables_filter {
+        float: right;
+        margin-bottom: 10px;
+    }
+</style>
+
+<h2>
+    @ViewBag.Title
+    <a href="@Url.Action("Create")" class="btn btn-sm btn-primary pull-right hidden-sm hidden-xs"><span class="fa fa-fw fa-plus"></span> Add a new building</a>
+</h2>
+<ol class="breadcrumb">
+    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+    <li><a href="@Url.Action("Index", "Buildings")">Buildings</a></li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+
+<div class="table-responsive">
+    <table class="table table-hover table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Country</th>
+                <th>Address</th>
+                <th>Description</th>
+                <th>Opens at</th>
+                <th>Closes at</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Building b in Model.ToList())
+            {
+                <tr>
+                    <td><kbd>@b.BuildingCode</kbd></td>
+                    <td>@b.Name</td>
+                    <td>@b.Country</td>
+                    <td><center><span class="fa fa-fw fa-eye tlt" title="@b.Address.Replace("\"", "'")"></span></center></td>
+                    <td><center><span class="fa fa-fw fa-eye tlt" title="@b.Description.Replace("\"", "'")"></span></center></td>
+                    <td>@b.OpenHour</td>
+                    <td>@b.CloseHour</td>
+                    <td>
+                        <a href="@Url.Action("Index", "Rooms", new { @BuildingID = b.BuildingID })" title="View the rooms in this building" class="btn btn-default btn-sm"><span class="fa fa-fw fa-eye"></span> Rooms</a>
+                        <a href="@Url.Action("Details", new { @id = b.BuildingID })" title="View building details" class="btn btn-default btn-sm"><span class="fa fa-fw fa-eye"></span> View details</a>
+                        <a href="@Url.Action("Edit", new { @id = b.BuildingID })" title="Edit building" class="btn btn-primary btn-sm"><span class="fa fa-fw fa-pencil"></span> Edit</a>
+                        <a href="@Url.Action("Delete", new { @id = b.BuildingID })" title="Delete building" class="btn btn-danger btn-sm"><span class="fa fa-fw fa-trash-o"></span> Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/dataTables");
+    <script>
+        $(document).ready(function () {
+            $(".table").DataTable({
+                order: [],
+                "pageLength": 50,
+            });
+        });
+        $(".tlt").tooltip();
+    </script>
+}

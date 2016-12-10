@@ -1,0 +1,58 @@
+﻿@model Visma_Room2Meet.Room
+
+@{
+    ViewBag.Title = "View meeting room details";
+    var userRoleOrder = Visma_Room2Meet.Helpers.User.GetUserRoleOrder(User.Identity.Name);
+}
+
+<h2>@ViewBag.Title</h2>
+@if (userRoleOrder == -1)
+{
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+        <li><a href="@Url.Action("Index", "Rooms")">Meeting rooms</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+}
+<br />
+
+<div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        @if (Model.ImgUrl != null)
+        {
+            <img class="img-responsive" src="@Model.ImgUrl" />
+        }
+        <h3>@Model.Name</h3>
+        <h4>Building code: <kbd>@Model.Building.BuildingCode</kbd></h4>
+        <h4>Floor: <kbd>@Model.Floor</kbd></h4>
+        <h4>Room code: <kbd>@Model.RoomCode</kbd></h4>
+        <h4>Capacity: <b>@Model.Capacity</b></h4>
+    </div>
+    <div class="col-lg-8 col-md-6 col-sm-12">
+        @if (Model.Description != null)
+        {
+            <p>@Html.Raw(Model.Description)</p>
+        }
+        Maximum booking hours: <b>@Html.Raw(Model.MaximumBookingHours)</b>
+        <br /><br />
+        Assets: <h5>
+        @foreach (RoomAsset ra in Model.RoomAssets.ToList())
+        {
+            <span class="label label-primary tlt" title="@ra.Description.Replace("\"", "'")">@Html.Raw(ra.Asset.ShowAs)</span>
+        }
+        </h5>
+        <br />
+        Users allowed to book this room: <h5>
+        @foreach (RoomRole rr in Model.RoomRoles.ToList())
+        {
+            <span class="label label-success">@rr.AspNetRole.Name</span>
+        }
+        </h5>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(".tlt").tooltip();
+    </script>
+}

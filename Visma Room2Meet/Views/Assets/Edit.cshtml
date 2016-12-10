@@ -1,0 +1,52 @@
+﻿@model Visma_Room2Meet.Asset
+
+@{
+    ViewBag.Title = "Edit an existing asset";
+}
+
+<h2>@ViewBag.Title</h2>
+<ol class="breadcrumb">
+    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+    <li><a href="@Url.Action("Index", "Assets")">Assets</a></li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.AssetID)
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <br />
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="Name">Name</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Asset name" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="Description">Description</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @placeholder = "Asset description" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="ShowAs">Show as</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ShowAs, new { htmlAttributes = new { @class = "form-control", @placeholder = "The text which will be shown for this asset (HTML-ready)" } })
+                @Html.ValidationMessageFor(model => model.ShowAs, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+        <center>
+            <button type="submit" class="btn btn-primary"><span class="fa fa-fw fa-save"></span> Save asset!</button>
+        </center>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

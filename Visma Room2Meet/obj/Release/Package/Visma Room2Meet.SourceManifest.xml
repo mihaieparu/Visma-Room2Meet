@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sitemanifest>
+  <IisApp path="C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\obj\Release\Package\PackageTmp" />
+  <setAcl path="C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
+  <setAcl path="C:\Users\Mihai\documents\visual studio 2015\Projects\Visma Room2Meet\Visma Room2Meet\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
+</sitemanifest>
