@@ -1,4 +1,4 @@
-##Welcome to the VismaRoom2Meet application!
+##Welcome to the Visma Room2Meet application!
 
 The main application can be found at **http://room2meet.azurewebsites.net/**.
 
