@@ -48,6 +48,8 @@
             <span class="label label-success">@rr.AspNetRole.Name</span>
         }
         </h5>
+        <br />
+        <a href="@Url.Action("Book", "Rooms", new { @id = Model.RoomID })" class="btn btn-primary"><span class="fa fa-fw fa-ticket"></span> Book now!</a>
     </div>
 </div>
 
