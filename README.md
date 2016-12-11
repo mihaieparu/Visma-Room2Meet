@@ -1,6 +1,7 @@
 ##Welcome to the Visma Room2Meet application!
 
 The main application can be found at **http://room2meet.azurewebsites.net/**.
+
 Warning! All dates are converted to the UTC format! Please keep in mind that Romania's hour is UTC+2 (during the winter)/UTC+3 (during the summer).
 
 ##Website documentation
